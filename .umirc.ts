@@ -8,5 +8,7 @@ export default defineConfig({
   // more config: https://d.umijs.org/config,
   styles: [
     'http://unpkg.com/antd/dist/antd.min.css'
-  ]
+  ],
+  exportStatic: {},
+  publicPath: './'
 });
