@@ -28,10 +28,12 @@
   },
   "dependencies": {
     "antd": "^4.16.0",
+    "lodash.memoize": "^4.1.2",
     "qs": "^6.10.1",
     "react": "^16.12.0"
   },
   "devDependencies": {
+    "@types/lodash.memoize": "^4.1.6",
     "@types/qs": "^6.9.6",
     "@types/react-router-dom": "^5.1.7",
     "@umijs/test": "^3.0.5",
