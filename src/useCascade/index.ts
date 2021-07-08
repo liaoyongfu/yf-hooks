@@ -1,16 +1,15 @@
 import { getLen, getSelectedOptions } from '@/utils/cascaderUtils';
 
-
 export interface CascadeOptions {
   label: string;
   value: string | number;
-  children?: CascadeOptions[],
+  children?: CascadeOptions[];
   [prop: string]: any;
 }
 
 interface Cascade {
   options: CascadeOptions[];
-  value: string | number;
+  value: string | undefined;
   col?: number;
   valueKey?: string;
 }
@@ -27,14 +26,14 @@ const useCascade = ({ options, value, col, valueKey = 'value' }: Cascade) => {
         : [];
     return {
       value: selectedOptions[index],
-      options: itemOptions
+      options: itemOptions,
     };
   });
 
   return {
     items,
     selectedOptions,
-    len
+    len,
   };
 };
 

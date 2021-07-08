@@ -119,15 +119,12 @@ const memoizedNodes = memoize((data: CascadeOptions[], valueKey: string) => {
  */
 export const getSelectedOptions = (
   options: CascadeOptions[],
-  value: string | number,
+  value: string | undefined,
   valueKey: string,
 ) => {
   const { idMap, pidMap } = memoizedNodes(options, valueKey);
 
   return value
-    ? [
-        ...pidMap[value].map((childId: string | number) => idMap[childId]),
-        idMap[value],
-      ]
+    ? [...pidMap[value].map((childId: string) => idMap[childId]), idMap[value]]
     : [];
 };
