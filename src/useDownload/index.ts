@@ -8,17 +8,16 @@ const useDownload = () => {
     const link = document.createElement('a');
 
     link.href = url;
-    if (filename){
+    if (filename) {
       link.download = filename;
     }
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
   };
   return {
-    downloadFile
-  }
+    downloadFile,
+  };
 };
 
 export default useDownload;

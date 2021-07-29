@@ -13,8 +13,8 @@ const useModal = (initialVisible = false) => {
     visible,
     onClose,
     onOpen,
-    toggle
-  }
+    toggle,
+  };
 };
 
 export default useModal;
