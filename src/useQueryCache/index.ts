@@ -22,7 +22,7 @@ const useQueryCache = ({ data, initData, autoCache = false }: QueryCache) => {
     const noEmptyObject: Record<any, any> = {};
     Object.keys(search).forEach((propName) => {
       if (typeof search[propName] !== 'undefined' && search[propName] !== '') {
-        noEmptyObject.propName = search[propName];
+        noEmptyObject[propName] = search[propName];
       }
     });
     history.replace({
