@@ -14,7 +14,19 @@ interface Cascade {
   valueKey?: string;
 }
 
-const useCascade = ({ options, value, col, valueKey = 'value' }: Cascade) => {
+const useCascade = ({
+  options,
+  value,
+  col,
+  valueKey = 'value',
+}: Cascade): {
+  items: {
+    value: string | undefined;
+    options: CascadeOptions[];
+  }[];
+  selectedOptions: CascadeOptions[];
+  len: number;
+} => {
   const len = col || getLen(options);
   const selectedOptions = getSelectedOptions(options, value, valueKey);
   const items = [...Array(len).keys()].map((_, index) => {

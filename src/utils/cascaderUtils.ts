@@ -125,6 +125,11 @@ export const getSelectedOptions = (
   const { idMap, pidMap } = memoizedNodes(options, valueKey);
 
   return value
-    ? [...pidMap[value].map((childId: string) => idMap[childId]), idMap[value]]
+    ? pidMap[value]
+      ? [
+          ...pidMap[value].map((childId: string) => idMap[childId]),
+          idMap[value],
+        ]
+      : []
     : [];
 };
