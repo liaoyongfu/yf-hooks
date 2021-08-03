@@ -50,7 +50,7 @@ export const useListView = ({
   const onEndReached = async () => {
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
-    if (isLoading && hasMore) {
+    if (!hasMore) {
       return;
     }
     setIsLoading(true);
@@ -62,6 +62,8 @@ export const useListView = ({
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
+      setRefreshing(true);
       const gd = await genData(1);
 
       rData.current = gd;
@@ -73,12 +75,7 @@ export const useListView = ({
 
   useEffect(() => {
     if (!container || !lv.current) return;
-    const indicator = document.querySelector(
-      '.mshare-pull-to-refresh-indicator',
-    );
-    if (!indicator) return;
-    const hei =
-      container.clientHeight - lv.current.offsetTop - indicator.clientHeight;
+    const hei = container.clientHeight - lv.current.offsetTop;
 
     setHeight(hei);
   }, [lv, container, dataSource]);
