@@ -2,6 +2,12 @@
 
 积累项目中常用的自定义 hook
 
+## 安装
+
+```
+yarn add yf-hooks
+```
+
 ## Hooks
 
 - useCascade: 提供级联逻辑
