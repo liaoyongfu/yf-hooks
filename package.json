@@ -1,6 +1,6 @@
 {
   "name": "yf-hooks",
-  "version": "0.0.6-beta.5",
+  "version": "0.0.7-beta.0",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "lodash.memoize": "^4.1.2",
-    "qs": "^6.10.1"
+    "qs": "^6.10.1",
+    "react-use": "^17.2.4"
   },
   "devDependencies": {
     "@types/lodash.memoize": "^4.1.6",
