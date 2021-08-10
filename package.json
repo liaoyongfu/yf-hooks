@@ -1,6 +1,6 @@
 {
   "name": "yf-hooks",
-  "version": "0.0.7-beta.0",
+  "version": "0.1.0",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -12,6 +12,11 @@
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
   },
+  "author": {
+    "name": "liaoyf"
+  },
+  "repository": "https://github.com/liaoyongfu/yf-hooks",
+  "homepage": "https://github.com/liaoyongfu/yf-hooks",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
