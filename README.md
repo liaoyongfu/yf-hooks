@@ -17,3 +17,8 @@ yarn add yf-hooks
 - useQuery: 获取 react-router 后面的 querystring
 - useQueryCache: 提供查询条件缓存逻辑
 - useDebounceText: 提供输入框防抖工具
+
+## Utils
+
+- cascadeUtils: 提供级联工具函数
+- DivisionUtils：提供行政区划工具函数
