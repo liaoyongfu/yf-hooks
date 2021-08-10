@@ -1,6 +1,6 @@
 ---
 group:
-path: /hooks
+  path: /hooks
 ---
 
 文件下载

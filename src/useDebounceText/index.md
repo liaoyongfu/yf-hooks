@@ -1,6 +1,6 @@
 ---
 group:
-path: /hooks
+  path: /hooks
 ---
 
 防抖输入
