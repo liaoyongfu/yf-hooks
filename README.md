@@ -16,3 +16,4 @@ yarn add yf-hooks
 - useModal: 提供模态框逻辑
 - useQuery: 获取 react-router 后面的 querystring
 - useQueryCache: 提供查询条件缓存逻辑
+- useDebounceText: 提供输入框防抖工具
