@@ -5,8 +5,6 @@ group:
 
 ## useModal
 
-> useModal(initialVisible: boolean = false) => { visible, onClose, onOpen, toggle }
-
 获取 Modal 工具函数
 
 ```tsx
@@ -35,3 +33,24 @@ export default () => {
   );
 };
 ```
+
+## API
+
+```
+const { visible, onClose, onOpen, toggle } = useModal(initialVisible: boolean = false)
+```
+
+### Params
+
+| 参数           | 说明     | 类型      | 默认值  |
+| -------------- | -------- | --------- | ------- |
+| initialVisible | 初始显示 | `boolean` | `false` |
+
+### Result
+
+| 参数    | 说明          | 类型      |
+| ------- | ------------- | --------- |
+| visible | 显示          | `boolean` |
+| toggle  | 切换显示/隐藏 | `boolean` |
+| onClose | 隐藏          | `boolean` |
+| onOpen  | 显示          | `boolean` |

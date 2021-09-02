@@ -5,8 +5,6 @@ group:
 
 ## useQueryCache
 
-> useQueryCache({ data: Record<string, any>, initData: Record<string, any>, autoCache: boolean = false }) => { cache: () => void, resetCache: () => void, updateToQuery: (object: Record<string, nay>) }
-
 缓存查询条件的功能比较常见，但是 React 原生不支持 `keep-alive` 功能。所以我们现在的做法是将查询条件缓存到 url 之上，这样进入详细页返回列表可以记住查询条件。
 
 ```tsx
@@ -118,3 +116,25 @@ export default () => {
 - 所有列表请求接口的参数统一从 url 中获取，如果 url 中未存在，则使用初始值
 - PC 端：查询/重置时更新参数到 url
 - H5 端：变更查询条件时调用 `updateToQuery` 更新当前变更的参数到 url
+
+## API
+
+```
+const { cache, resetCache, updateToQuery } = useQueryCache({ data: Record<string, any>, initData: Record<string, any>, autoCache: boolean = false });
+```
+
+### Params
+
+| 参数      | 说明                       | 类型                  | 默认值  |
+| --------- | -------------------------- | --------------------- | ------- |
+| data      | 要实时缓存的值             | `Record<string, nay>` |         |
+| initData  | 初始要缓存的值             | `Record<string, nay>` |         |
+| autoCache | 当 data 改变时是否自动缓存 | `boolean`             | `false` |
+
+### Result
+
+| 参数          | 说明                    | 类型                                    |
+| ------------- | ----------------------- | --------------------------------------- |
+| cache         | 缓存 data 的值          | `() => void`                            |
+| resetCache    | 重置缓存的值为 initData | `() => void`                            |
+| updateToQuery | 缓存自定义值            | `(object: Record<string, nay>) => void` |

@@ -1,4 +1,4 @@
-import { getLen, getSelectedOptions } from '@/utils/cascaderUtils';
+import { getLen, getSelectedOptions } from '@/utils/cascaderUtils/index';
 
 export interface CascadeOptions {
   label: string;

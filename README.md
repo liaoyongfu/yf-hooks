@@ -11,7 +11,6 @@ yarn add yf-hooks
 ## Hooks
 
 - useCascade: 提供级联逻辑
-- useDownload: 提供文件下载逻辑
 - useListView: 提供 mshareui 长列表逻辑（主要是下拉加载、上拉刷新）
 - useModal: 提供模态框逻辑
 - useQuery: 获取 react-router 后面的 querystring
@@ -21,4 +20,5 @@ yarn add yf-hooks
 ## Utils
 
 - cascadeUtils: 提供级联工具函数
-- DivisionUtils：提供行政区划工具函数
+- divisionUtils：提供行政区划工具函数
+- downloadFile: 下载文件

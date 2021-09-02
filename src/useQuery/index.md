@@ -34,3 +34,15 @@ const Demo = () => {
   // Output: { name: 'name', age: '12' }
 };
 ```
+
+## API
+
+```
+const query = useQuery()
+```
+
+### Result
+
+| 参数  | 说明   | 类型                   |
+| ----- | ------ | ---------------------- |
+| query | 参数值 | `Reacord<string, any>` |

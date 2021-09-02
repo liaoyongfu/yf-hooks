@@ -5,7 +5,37 @@ group:
 
 ## useListView
 
-@mshare/mshareui 长列表（包含上拉加载，下拉刷新）
+移动端长列表（包含上拉加载，下拉刷新）
+
+```
+const listView = useListView({
+    genData: fetchNextPage,
+    container: document.querySelector(`.${styles.list}`),
+    hasMore: page.currentPage < page.totalPage
+});
+
+<MobileList {...listView} renderRow={rowData => <div>xxx</div>} />
+```
+
+## API
+
+```
+const { dataSource, onEndReached, onRefresh, refreshing, height, isLoading } = useListView({ genData, container, hasMore });
+```
+
+### Params
+
+| 参数      | 说明                                    | 类型                                      | 默认值 |
+| --------- | --------------------------------------- | ----------------------------------------- | ------ |
+| genData   | 获取数据方法，请使用 `useCallback` 包裹 | `(currentPage: number) => Promise<any[]>` | `[]`   |
+| container | 容器节点，未指定则使用 `body` 作为容器  | `DOM`                                     |        |
+| hasMore   | 是否还有下一页数据                      | `boolean`                                 |        |
+
+### Result
+
+传递给 `<MobileListView />` 组件
+
+## MobileList 组件
 
 ```
 import React, { useRef } from 'react';

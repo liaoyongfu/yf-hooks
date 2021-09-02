@@ -5,7 +5,7 @@ export interface DivisionItem {
   [prop: string]: any;
 }
 
-export const DivisionUtils = {
+export const Index = {
   isCity: function (code: string) {
     return code.endsWith('00000000');
   },
