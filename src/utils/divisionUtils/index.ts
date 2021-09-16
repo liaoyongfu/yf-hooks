@@ -5,7 +5,7 @@ export interface DivisionItem {
   [prop: string]: any;
 }
 
-export const Index = {
+export const divisionUtils = {
   isCity: function (code: string) {
     return code.endsWith('00000000');
   },
@@ -38,7 +38,7 @@ export const Index = {
       street:
         this.isCity(code) || this.isDistrict(code)
           ? ''
-          : `${code.substr(0, 8)}00`,
+          : `${code.substr(0, 10)}00`,
       community:
         this.isCity(code) || this.isDistrict(code) || this.isStreet(code)
           ? ''
