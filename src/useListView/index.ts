@@ -9,8 +9,6 @@ export interface ListView {
   genData: (pageIndex: number) => Promise<Record<any, any>[]>;
   // 滚动视口，一般是 ListView 父级滚动节点
   container: HTMLElement;
-  // ListView 组件 Ref 引用
-  listViewRef: any;
   // 判断是否还有更多分页
   hasMore?: boolean;
   // 是否使用 body 作为视口
@@ -21,7 +19,6 @@ export const useListView = ({
   ListView,
   genData,
   container,
-  listViewRef: lv,
   hasMore = true,
   useBodyScroll = false,
 }: ListView) => {
@@ -42,6 +39,7 @@ export const useListView = ({
     setIsLoading(true);
     // simulate initial Ajax
     rData.current = await genData(1);
+    pageIndex = 1;
     setDataSource(dataSource.cloneWithRows(rData.current));
     setRefreshing(false);
     setIsLoading(false);
@@ -50,7 +48,7 @@ export const useListView = ({
   const onEndReached = async () => {
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
-    if (!hasMore) {
+    if (!hasMore || isLoading) {
       return;
     }
     setIsLoading(true);
@@ -65,6 +63,7 @@ export const useListView = ({
       setIsLoading(true);
       setRefreshing(true);
       const gd = await genData(1);
+      pageIndex = 1;
 
       rData.current = gd;
       setDataSource(dataSource.cloneWithRows(gd));
@@ -74,11 +73,11 @@ export const useListView = ({
   }, [genData]);
 
   useEffect(() => {
-    if (!container || !lv.current) return;
-    const hei = container.clientHeight - lv.current.offsetTop;
+    if (!container) return;
+    const hei = container.clientHeight;
 
     setHeight(hei);
-  }, [lv, container, dataSource]);
+  }, [container, dataSource]);
 
   useEffect(() => {
     if (useBodyScroll) {
