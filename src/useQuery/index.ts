@@ -1,10 +1,10 @@
 import { useLocation } from 'react-router-dom';
 import { parse } from 'qs';
 
-const useQuery = () => {
-  const location = useLocation();
+const useQuery = (location?: any) => {
+  const locationResult = location || useLocation();
 
-  return parse(location.search, { ignoreQueryPrefix: true }) as Record<
+  return parse(locationResult.search, { ignoreQueryPrefix: true }) as Record<
     any,
     any
   >;

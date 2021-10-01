@@ -7,11 +7,17 @@ export interface QueryCache {
   data: Record<string, any>;
   initData: Record<string, any>;
   autoCache: boolean;
+  location?: any;
 }
 
-const useQueryCache = ({ data, initData, autoCache = false }: QueryCache) => {
+const useQueryCache = ({
+  data,
+  initData,
+  autoCache = false,
+  location: originLocation,
+}: QueryCache) => {
   const history = useHistory();
-  const location = useLocation();
+  const location = originLocation || useLocation();
   const query = useQuery();
 
   const updateToQuery = (object: Record<string, any>) => {

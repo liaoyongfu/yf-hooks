@@ -5,7 +5,7 @@ export interface DivisionItem {
   [prop: string]: any;
 }
 
-export const divisionUtils = {
+const divisionUtils = {
   isCity: function (code: string) {
     return code.endsWith('00000000');
   },
@@ -91,3 +91,5 @@ export const divisionUtils = {
       });
   },
 };
+
+export default divisionUtils;
