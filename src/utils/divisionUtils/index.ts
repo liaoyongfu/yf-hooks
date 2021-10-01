@@ -7,19 +7,19 @@ export interface DivisionItem {
 
 const divisionUtils = {
   isCity: function (code: string) {
-    return code.endsWith('00000000');
+    return code && code.endsWith('00000000');
   },
   isDistrict: function (code: string) {
-    return !this.isCity(code) && code.endsWith('000000');
+    return code && !this.isCity(code) && code.endsWith('000000');
   },
   isStreet: function (code: string) {
-    return !this.isDistrict(code) && code.endsWith('000');
+    return code && !this.isDistrict(code) && code.endsWith('000');
   },
   isCommunity: function (code: string) {
-    return !this.isStreet(code) && !this.isGrid(code);
+    return code && !this.isStreet(code) && !this.isGrid(code);
   },
   isGrid: function (code: string) {
-    return code.length === 16;
+    return code && code.length === 16;
   },
   // 获取各个级别的行政区划 code
   getLevels: function (code: string | undefined) {
