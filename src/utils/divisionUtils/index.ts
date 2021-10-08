@@ -16,7 +16,7 @@ const divisionUtils = {
     return code && !this.isDistrict(code) && code.endsWith('000');
   },
   isCommunity: function (code: string) {
-    return code && !this.isStreet(code) && !this.isGrid(code);
+    return code && code.length === 12 && !code.endsWith('000');
   },
   isGrid: function (code: string) {
     return code && code.length === 16;
