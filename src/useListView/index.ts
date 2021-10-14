@@ -74,18 +74,12 @@ export const useListView = ({
 
   useEffect(() => {
     if (!container) return;
-    const hei = container.clientHeight;
+    setTimeout(() => {
+      const hei = container.clientHeight;
 
-    setHeight(hei);
-  }, [container, dataSource]);
-
-  useEffect(() => {
-    if (useBodyScroll) {
-      document.body.style.overflow = 'auto';
-    } else {
-      document.body.style.overflow = 'hidden';
-    }
-  }, [useBodyScroll]);
+      setHeight(hei);
+    });
+  });
 
   return {
     dataSource,
