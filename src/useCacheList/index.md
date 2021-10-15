@@ -57,6 +57,7 @@ const Demo = () => {
     initFormState: {
       xzqh: query.xzqh || userXzqh,
     },
+    // 请求时不传递字段
     excludedFields: ['regTimeBegin'],
   });
   return (
