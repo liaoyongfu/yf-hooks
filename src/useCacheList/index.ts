@@ -1,6 +1,6 @@
 import useQuery from '@/useQuery';
 import useQueryCache from '@/useQueryCache';
-import { useDeepCompareEffect } from 'react-use';
+import { useEffect } from 'react';
 
 export interface CacheListProps {
   reqData?: Record<any, any>;
@@ -169,14 +169,14 @@ const useCacheList = ({
     resetCache();
   };
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     form.reset();
     form.setFieldValues(initFormState);
-  }, [initFormState]);
+  }, [JSON.stringify(initFormState)]);
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     listState.query(initReqData);
-  }, [initReqData]);
+  }, [JSON.stringify(initReqData)]);
 
   return {
     search,
