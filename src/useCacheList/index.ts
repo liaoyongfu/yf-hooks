@@ -1,6 +1,6 @@
 import useQuery from '@/useQuery';
 import useQueryCache from '@/useQueryCache';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface CacheListProps {
   reqData?: Record<any, any>;
@@ -121,6 +121,7 @@ const useCacheList = ({
   initReqData: userInitReqData,
   initFormState: userInitFormState,
 }: CacheListProps) => {
+  const [searchCount, setSearchCount] = useState(0);
   const query = useQuery();
   const reqData = removeExcludeFields(
     {
@@ -159,8 +160,14 @@ const useCacheList = ({
     initData: emptyInitReqData,
   });
 
+  const refresh = () => {
+    setSearchCount((prev) => prev + 1);
+  };
+
   const search = () => {
     cache();
+    // 如果查询条件没变，也应该请求
+    refresh();
   };
 
   const reset = () => {
@@ -176,11 +183,12 @@ const useCacheList = ({
 
   useEffect(() => {
     listState.query(initReqData);
-  }, [JSON.stringify(initReqData)]);
+  }, [JSON.stringify(initReqData), searchCount]);
 
   return {
     search,
     reset,
+    refresh,
     updateToQuery,
   };
 };
