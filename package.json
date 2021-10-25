@@ -1,6 +1,6 @@
 {
   "name": "yf-hooks",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",

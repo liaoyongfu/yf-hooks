@@ -17,9 +17,17 @@ export interface CacheListProps {
     refresh: any;
   };
   excludedFields?: string[];
+  calendarBeginName?: string;
+  calendarEndName?: string;
+  calendarIsObject?: boolean;
 }
 
-const getReqData = (values: Record<any, any>) => {
+const getReqData = (
+  values: Record<any, any>,
+  calendarBeginName: string,
+  calendarEndName: string,
+  calendarIsObject: boolean,
+) => {
   const reqData: Record<any, any> = {};
 
   Object.keys(values).forEach((fieldName) => {
@@ -27,12 +35,13 @@ const getReqData = (values: Record<any, any>) => {
 
     // 处理日期格式
     if (
+      calendarIsObject &&
       typeof fieldValue === 'object' &&
       typeof fieldValue.start !== 'undefined' &&
       typeof fieldValue.end !== 'undefined'
     ) {
-      reqData[`${fieldName}Begin`] = fieldValue.start || '';
-      reqData[`${fieldName}End`] = fieldValue.end || '';
+      reqData[`${fieldName}${calendarBeginName}`] = fieldValue.start || '';
+      reqData[`${fieldName}${calendarEndName}`] = fieldValue.end || '';
     } else if (typeof fieldValue === 'boolean') {
       // 处理布尔值
       reqData[fieldName] = fieldValue ? '1' : '0';
@@ -49,26 +58,30 @@ const getReqData = (values: Record<any, any>) => {
 const getInitFormState = (
   values: Record<any, any>,
   query: Record<any, any>,
+  calendarBeginName: string,
+  calendarEndName: string,
+  calendarIsObject: boolean,
 ) => {
   const initFormState: Record<any, any> = {};
 
   Object.keys(query).forEach((fieldName) => {
     const fieldValue = query[fieldName];
 
-    if (fieldName.endsWith('Begin')) {
-      if (initFormState[fieldName.replace('Begin', '')]) {
-        initFormState[fieldName.replace('Begin', '')].start = fieldValue;
+    if (calendarIsObject && fieldName.endsWith(calendarBeginName)) {
+      if (initFormState[fieldName.replace(calendarBeginName, '')]) {
+        initFormState[fieldName.replace(calendarBeginName, '')].start =
+          fieldValue;
       } else {
-        initFormState[fieldName.replace('Begin', '')] = {
+        initFormState[fieldName.replace(calendarBeginName, '')] = {
           start: fieldValue,
           end: '',
         };
       }
-    } else if (fieldName.endsWith('End')) {
-      if (initFormState[fieldName.replace('End', '')]) {
-        initFormState[fieldName.replace('End', '')].end = fieldValue;
+    } else if (calendarIsObject && fieldName.endsWith('End')) {
+      if (initFormState[fieldName.replace(calendarEndName, '')]) {
+        initFormState[fieldName.replace(calendarEndName, '')].end = fieldValue;
       } else {
-        initFormState[fieldName.replace('End', '')] = {
+        initFormState[fieldName.replace(calendarEndName, '')] = {
           start: '',
           end: fieldValue,
         };
@@ -120,12 +133,19 @@ const useCacheList = ({
   reqData: userReqData,
   initReqData: userInitReqData,
   initFormState: userInitFormState,
+  calendarBeginName = 'Begin',
+  calendarEndName = 'End',
+  calendarIsObject = true,
 }: CacheListProps) => {
-  const [searchCount, setSearchCount] = useState(0);
   const query = useQuery();
   const reqData = removeExcludeFields(
     {
-      ...getReqData(values),
+      ...getReqData(
+        values,
+        calendarBeginName,
+        calendarEndName,
+        calendarIsObject,
+      ),
       ...userReqData,
     },
     excludedFields,
@@ -138,7 +158,13 @@ const useCacheList = ({
     excludedFields,
   );
   const initFormState = {
-    ...getInitFormState(values, query),
+    ...getInitFormState(
+      values,
+      query,
+      calendarBeginName,
+      calendarEndName,
+      calendarIsObject,
+    ),
     ...userInitFormState,
   };
   const emptyInitReqData: Record<any, any> = {};
@@ -160,14 +186,12 @@ const useCacheList = ({
     initData: emptyInitReqData,
   });
 
-  const refresh = () => {
-    setSearchCount((prev) => prev + 1);
-  };
-
   const search = () => {
     cache();
     // 如果查询条件没变，也应该请求
-    refresh();
+    if (JSON.stringify(reqData) === JSON.stringify(initReqData)) {
+      listState.refresh();
+    }
   };
 
   const reset = () => {
@@ -183,12 +207,11 @@ const useCacheList = ({
 
   useEffect(() => {
     listState.query(initReqData);
-  }, [JSON.stringify(initReqData), searchCount]);
+  }, [JSON.stringify(initReqData)]);
 
   return {
     search,
     reset,
-    refresh,
     updateToQuery,
   };
 };
