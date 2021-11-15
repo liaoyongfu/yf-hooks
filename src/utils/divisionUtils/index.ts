@@ -64,9 +64,13 @@ export const getValue = (code: string) => {
 export const filter = (
   data: DivisionItem[],
   baseDivision: string,
+  userWgs?: string[],
 ): DivisionItem[] => {
   return data
     .filter((item) => {
+      if (isGrid(item.value) && userWgs && userWgs.length > 0) {
+        return userWgs.includes(item.value);
+      }
       if (item.value > baseDivision) {
         return item.value.indexOf(baseDivision.replace(/0+$/g, '')) === 0;
       } else {
@@ -77,7 +81,7 @@ export const filter = (
       if (item.children) {
         return {
           ...item,
-          children: filter(item.children, baseDivision),
+          children: filter(item.children, baseDivision, userWgs),
         };
       } else {
         return item;

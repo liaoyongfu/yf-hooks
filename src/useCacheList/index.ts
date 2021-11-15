@@ -65,6 +65,7 @@ const getInitFormState = (
   const initFormState: Record<any, any> = {};
 
   Object.keys(query).forEach((fieldName) => {
+    if (!Object.keys(values).includes(fieldName)) return;
     const fieldValue = query[fieldName];
 
     if (calendarIsObject && fieldName.endsWith(calendarBeginName)) {
@@ -170,6 +171,7 @@ const useCacheList = ({
   const emptyInitReqData: Record<any, any> = {};
 
   Object.keys(initReqData).forEach((fieldName) => {
+    if (!Object.keys(values).includes(fieldName)) return;
     const fieldValue = initReqData[fieldName];
 
     if (Array.isArray(fieldValue)) {
