@@ -5,6 +5,7 @@ export { default as useCascade } from './useCascade';
 export { default as useListView } from './useListView';
 export { default as useDebounceText } from './useDebounceText';
 export { default as useCacheList } from './useCacheList';
+export { default as useRow } from './useRow';
 export * as cascadeUtils from './utils/cascaderUtils';
 export * as divisionUtils from './utils/divisionUtils';
 export * as downloadUtils from './utils/downloadFile';
