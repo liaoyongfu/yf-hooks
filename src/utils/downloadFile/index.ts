@@ -22,7 +22,10 @@ export const downLoadBlobFile = async (
   const _blob = await res.blob();
 
   // 匹配出文件名
-  _fileName = _fileName.replace(/(.*)(filename=){1}(.+)$/g, '$3');
+  _fileName = _fileName
+    .replace(/(.*)(filename=){1}(.+)$/g, '$3')
+    .replace(/^"/, '')
+    .replace(/"$/, '');
   // 文件名解码
   _fileName = _fileName
     ? decodeURI(decodeURIComponent(_fileName))
