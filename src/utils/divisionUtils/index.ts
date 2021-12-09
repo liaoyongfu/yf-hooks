@@ -88,3 +88,25 @@ export const filter = (
       }
     });
 };
+
+// 判断是否是某个的子节点
+export const isChildren = (parentCode: string, childrenCode: string) => {
+  const parent = parentCode.replace(/0+$/g, '');
+  return childrenCode.indexOf(parent) === 0;
+};
+
+// 判断是否是第一层子节点
+export const isNextChildren = (parentCode: string, childrenCode: string) => {
+  if (!isChildren(parentCode, childrenCode)) return false;
+  if (isCity(parentCode)) {
+    return isDistrict(childrenCode);
+  } else if (isDistrict(parentCode)) {
+    return isStreet(childrenCode);
+  } else if (isStreet(parentCode)) {
+    return isCommunity(childrenCode);
+  } else if (isCommunity(parentCode)) {
+    return isGrid(childrenCode);
+  } else {
+    return false;
+  }
+};

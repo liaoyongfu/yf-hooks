@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { stringify } from 'qs';
+
 export const downloadFile = (blobData: any, filename: string) => {
   const url = window.URL.createObjectURL(blobData);
   // 通过创建a标签实现
@@ -24,12 +27,41 @@ export const downLoadBlobFile = async (
   // 匹配出文件名
   _fileName = _fileName
     .replace(/(.*)(filename=){1}(.+)$/g, '$3')
-    .replace(/^"/, '')
-    .replace(/"$/, '');
+    .replace(/"/g, '')
+    .replace(/;/g, '');
   // 文件名解码
   _fileName = _fileName
     ? decodeURI(decodeURIComponent(_fileName))
     : defaultFileName;
 
   downloadFile(_blob, _fileName);
+};
+
+export const useExport = (url: string, reqData: Record<any, any>) => {
+  const [loading, setLoading] = useState(false);
+  // 处理导出
+  const handleExport = async () => {
+    try {
+      setLoading(true);
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          body: stringify(reqData),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            responseType: 'blob',
+          },
+        });
+
+        await downLoadBlobFile(res);
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
+  };
+
+  return { loading, handleExport };
 };
