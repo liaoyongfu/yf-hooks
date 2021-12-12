@@ -6,18 +6,18 @@ export interface DivisionItem {
 }
 
 // 是否是市级
-export const isCity = (code: string) => code && code.endsWith('00000000');
+export const isCity = (code: string) => !!code && code.endsWith('00000000');
 // 是否是区级
 export const isDistrict = (code: string) =>
-  code && !isCity(code) && code.endsWith('000000');
+  !!code && !isCity(code) && code.endsWith('000000');
 // 是否是街道
 export const isStreet = (code: string) =>
-  code && !isDistrict(code) && code.endsWith('000');
+  !!code && !isDistrict(code) && code.endsWith('000');
 // 是否是社区
 export const isCommunity = (code: string) =>
-  code && code.length === 12 && !code.endsWith('000');
+  !!code && code.length === 12 && !code.endsWith('000');
 // 是否是网格
-export const isGrid = (code: string) => code && code.length === 16;
+export const isGrid = (code: string) => !!code && code.length === 16;
 // 获取每一层级的值
 export const getLevels = (code: string | undefined) => {
   if (!code) {
@@ -96,7 +96,10 @@ export const isChildren = (parentCode: string, childrenCode: string) => {
 };
 
 // 判断是否是第一层子节点
-export const isNextChildren = (parentCode: string, childrenCode: string) => {
+export const isNextChildren = (
+  parentCode: string,
+  childrenCode: string,
+): boolean => {
   if (!isChildren(parentCode, childrenCode)) return false;
   if (isCity(parentCode)) {
     return isDistrict(childrenCode);

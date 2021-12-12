@@ -7,7 +7,7 @@ interface transListToTreeProps {
   data: CascadeOptions[];
   isChildren: isChildren;
   isRoot: isRoot;
-  valueKey: string;
+  valueKey?: string;
 }
 
 const getChildrenNodes = (
