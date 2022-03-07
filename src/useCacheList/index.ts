@@ -3,8 +3,17 @@ import useQueryCache from '@/useQueryCache';
 import { useEffect, useState } from 'react';
 
 export interface CacheListProps {
+  /**
+   * 请求参数，如果表单值和查询字段值一样或者日期，则可以不用指定，否则需要自行指定
+   */
   reqData?: Record<any, any>;
+  /**
+   * 初始请求参数，同上
+   */
   initReqData?: Record<any, any>;
+  /**
+   * 初始表单值
+   */
   initFormState?: Record<any, any>;
   form: {
     setFieldValues: any;
@@ -16,9 +25,21 @@ export interface CacheListProps {
     query: any;
     refresh: any;
   };
+  /**
+   * 排除请求的字段
+   */
   excludedFields?: string[];
+  /**
+   * CalendarRange 组件开始日期字段名
+   */
   calendarBeginName?: string;
+  /**
+   * CalendarRange 组件结束日期字段名
+   */
   calendarEndName?: string;
+  /**
+   * 因为 shareui-form 3.x 的 CalendarRange 的值是数组，而以下是 { start: xx, end: xx}，所以需要指定 CalendarRange 的值是否是对象模式，不然里面不知道怎么做映射关系，默认是 true
+   */
   calendarIsObject?: boolean;
 }
 

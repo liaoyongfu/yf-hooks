@@ -5,13 +5,23 @@ const useRow = (initialVisible = false) => {
   const [curRow, setCurRow] = useState<Record<any, any> | undefined>();
 
   const toggle = () => setVisible(!visible);
-  const changeCurRow = (r: Record<any, any> | undefined) => setCurRow(r);
+  const changeCurRow = (r?: Record<any, any>) => setCurRow(r);
+  const add = () => {
+    changeCurRow();
+    toggle();
+  };
+  const edit = (item: Record<any, any>) => {
+    changeCurRow(item);
+    toggle();
+  };
 
   return {
     curRow,
     visible,
     toggle,
     changeCurRow,
+    add,
+    edit,
   };
 };
 

@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { useDebounce } from 'react-use';
 
+/**
+ * @deprecated 请使用 ahooks 的 useDebounce 代替
+ * @param initValue
+ * @param ms
+ * @returns
+ */
 const useDebounceText = (initValue = '', ms = 1500) => {
   const [originValue, setOriginValue] = useState(initValue);
   const [targetValue, setTargetValue] = useState(initValue);
