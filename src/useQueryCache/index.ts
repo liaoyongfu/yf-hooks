@@ -2,22 +2,17 @@ import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { stringify } from 'qs';
 import useQuery from '@/useQuery';
+import { useDeepCompareEffect } from 'react-use';
 
 export interface QueryCache {
   data: Record<string, any>;
   initData: Record<string, any>;
   autoCache: boolean;
-  location?: any;
 }
 
-const useQueryCache = ({
-  data,
-  initData,
-  autoCache = false,
-  location: originLocation,
-}: QueryCache) => {
+const useQueryCache = ({ data, initData, autoCache = false }: QueryCache) => {
   const history = useHistory();
-  const location = originLocation || useLocation();
+  const location = useLocation();
   const query = useQuery();
 
   const updateToQuery = (object: Record<string, any>) => {
@@ -47,6 +42,10 @@ const useQueryCache = ({
     if (!autoCache) return;
     updateToQuery(data);
   }, [JSON.stringify(data), autoCache]);
+
+  useDeepCompareEffect(() => {
+    if (!autoCache) return;
+  }, [data, autoCache]);
 
   return {
     cache,

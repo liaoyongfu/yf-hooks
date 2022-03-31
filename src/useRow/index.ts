@@ -1,16 +1,19 @@
 import { useState } from 'react';
 
-const useRow = (initialVisible = false) => {
+const useRow = <Row>(initialVisible = false, initialRow = undefined) => {
   const [visible, setVisible] = useState(initialVisible);
-  const [curRow, setCurRow] = useState<Record<any, any> | undefined>();
+  const [curRow, setCurRow] = useState<Row | undefined>(initialRow);
 
   const toggle = () => setVisible(!visible);
-  const changeCurRow = (r?: Record<any, any>) => setCurRow(r);
+
+  const changeCurRow = (r?: Row) => setCurRow(r);
+
   const add = () => {
     changeCurRow();
     toggle();
   };
-  const edit = (item: Record<any, any>) => {
+
+  const edit = (item: Row) => {
     changeCurRow(item);
     toggle();
   };

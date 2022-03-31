@@ -1,10 +1,10 @@
 import { useLocation } from 'react-router-dom';
 import { parse } from 'qs';
 
-const useQuery = (location?: any) => {
-  const locationResult = location || useLocation();
+const useQuery = () => {
+  const location = useLocation();
 
-  return parse(locationResult.search, {
+  return parse(location.search, {
     ignoreQueryPrefix: true,
     decoder(str, defaultDecoder, charset, type) {
       if (type === 'key') {
@@ -13,7 +13,7 @@ const useQuery = (location?: any) => {
         return str; // Decoded value
       }
     },
-  }) as Record<any, any>;
+  });
 };
 
 export default useQuery;
