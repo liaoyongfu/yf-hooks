@@ -12,7 +12,7 @@ export const isDistrict = (code: string) =>
   !!code && !isCity(code) && code.endsWith('000000');
 // 是否是街道
 export const isStreet = (code: string) =>
-  !!code && !isDistrict(code) && code.endsWith('000');
+  !!code && !isCity(code) && !isDistrict(code) && code.endsWith('000');
 // 是否是社区
 export const isCommunity = (code: string) =>
   !!code && code.length === 12 && !code.endsWith('000');
